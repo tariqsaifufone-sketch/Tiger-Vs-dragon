@@ -1,1 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Historical Data Analyzer</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:#fff;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 0 15px rgba(0,0,0,.3);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+color:#38bdf8;
+}
+
+textarea{
+width:100%;
+height:220px;
+background:#111827;
+color:#fff;
+border:1px solid #334155;
+border-radius:10px;
+padding:10px;
+font-size:17px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+background:#0ea5e9;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+.result{
+margin-top:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.box{
+background:#111827;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.number{
+font-size:30px;
+font-weight:bold;
+margin-top:10px;
+color:#22c55e;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+color:#94a3b8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Historical Data Analyzer</h1>
+
+<div class="card">
+
+<textarea id="data" placeholder="Example
+
+T
+D
+T
+T
+D
+D
+T"></textarea>
+
+<button onclick="analyze()">
+Analyze Historical Data
+</button>
+
+</div>
+
+<div class="result">
+
+<div class="box">
+
+<h3>Total Rounds</h3>
+
+<div id="total" class="number">0</div>
+
+</div>
+
+<div class="box">
+
+<h3>Tiger</h3>
+
+<div id="tiger" class="number">0</div>
+
+</div>
+
+<div class="box">
+
+<h3>Dragon</h3>
+
+<div id="dragon" class="number">0</div>
+
+</div>
+
+<div class="box">
+
+<h3>Tiger %</h3>
+
+<div id="tp" class="number">0%</div>
+
+</div>
+
+<div class="box">
+
+<h3>Dragon %</h3>
+
+<div id="dp" class="number">0%</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+Version 1.0
+
+</div>
+
+</div>
+
+<script>
+
+function analyze(){
+
+let txt=document.getElementById("data").value.trim();
+
+if(txt==""){
+alert("Please enter historical data.");
+return;
+}
+
+let rows=txt.split("\n");
+
+let t=0;
+let d=0;
+
+rows.forEach(x=>{
+
+x=x.trim().toUpperCase();
+
+if(x=="T") t++;
+
+if(x=="D") d++;
+
+});
+
+let total=t+d;
+
+document.getElementById("total").innerHTML=total;
+document.getElementById("tiger").innerHTML=t;
+document.getElementById("dragon").innerHTML=d;
+
+document.getElementById("tp").innerHTML=((t/total)*100).toFixed(2)+"%";
+document.getElementById("dp").innerHTML=((d/total)*100).toFixed(2)+"%";
+
+}
+
+</script>
+
+</body>
+</html>
